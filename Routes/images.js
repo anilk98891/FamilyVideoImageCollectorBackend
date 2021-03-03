@@ -58,7 +58,7 @@ router.get("/", (req, res) =>{
         
         const user_id = req.body.user_id
         console.log(req.body);
-        const image = `http://${ip.address()}:3003/uploads/${req.file.filename}`
+        const image = `http://${ip.address()}:${process.env.PORT || 21823}/uploads/${req.file.filename}`
         const queryString  = "INSERT INTO images (user_id, image) VALUES(?, ?)"
         getConnection().query(queryString, [user_id, image], (err, results, fields)=>{
         if (err) {
@@ -75,8 +75,9 @@ router.get("/", (req, res) =>{
     
     const pool = mysql.createPool({
         connectionLimit: 10,
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'Family_DB'
+        host: 'mysql-21823-0.cloudclusters.net',
+        user: 'anil',
+        port: process.env.PORT || 21823,
+        password: 'qwerty78',
+        database: 'Family_DB'   
     })

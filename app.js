@@ -17,7 +17,5 @@ app.use('/uploads',express.static('upload/images')); // this for not shown the d
 //or app.use(express.static('upload')); //directly use images
 app.use('/uploads',express.static('upload/videos'));
 
-app.listen(3003, () => {
-    console.log("server is up and listening 3003..")
-})
+
 module.exports = app;

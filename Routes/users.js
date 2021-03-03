@@ -11,14 +11,16 @@ function getConnection() {
 
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'Family_DB'
+    host: 'mysql-21823-0.cloudclusters.net',
+    user: 'anil',
+    port: process.env.PORT || 21823,
+    password: 'qwerty78',
+    database: 'Family_DB'   
 })
 
 //MARK:-  get request
 router.get("/", (req, res) => {
+    console.log("enter");
     const email = req.params.email
     const queryString = "SELECT * FROM users"
     getConnection().query(queryString, [email], (err, rows, fields) => {
@@ -43,7 +45,7 @@ router.get("/:id", (req, res) =>{
             return
         }
         const users = rows.map((row) => {
-            return { "url" : row.video, "user_id" : row.user_id, "intrest" : row.intrests,"status" : "married","age" : row.age}
+            return { "url" : row.video, "user_id" : row.user_id, "intrest" : row.intrests,"status" : row.status,"age" : row.age}
         })
         res.json({"users" : users})
     })
